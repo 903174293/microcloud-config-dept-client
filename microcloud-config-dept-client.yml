@@ -1,0 +1,95 @@
+spring:
+  profiles:
+    active:
+    - dev
+---
+
+#####################以下配置Eureka
+eureka:
+  client:
+    service-url:
+#      defaultZone: http://eureka-7001.com:7001/eureka                #*******************定义服务的注册路径：非常关键
+#      defaultZone: http://edmin:hello@eureka-7001.com:7001/eureka                #*******所有的注册服务都需要添加认证信息************定义服务的注册路径：非常关键：eureka设置安全认证之后的路径
+      defaultZone: http://edmindev:hello@eureka-7001.com:7001/eureka
+  instance:
+     instance-id: dept-8001.com
+     prefer-ip-address: true     #***********底部显示IP地址：关键  **********鼠标指住注册信息，eureka页面左下角显示ip地址
+    
+info:
+    app.name: mldn-microcloud-dept
+    company.name: www.mldn.cn
+    build.aftifactId: $project.artifactId$
+    build.version: $project.version$
+
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml  # 定义mybatis核心配置文件的路径
+  type-aliases-package: cn.mldn.zwb.microcloud.vo       # 定义别名出现的开发包
+  mapper-locations:
+  - classpath:mybatis/mapping/**/*.xml            # 所有的映射文件路径
+
+spring: 
+  profiles: dev
+  application:
+    name: microcloud-config-dept-client
+   ########Application表格值回事大写MICROCLOUD-PROVIDER-DEPT#########*************关键：这里加入application.name，就可以在eureka注册中心注册的项目名改成合适的项目名（自定义的项目名）
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource  # 配置数据源类型
+    url: jdbc:mysql://localhost:3306/dept8001     # 数据库的连接地址
+    driver-class-name: org.gjt.mm.mysql.Driver    # 驱动程序
+    username: root                                # 用户名
+    password: 123456                          # 密码
+    dbcp2:                                        # 数据库连接池配置
+      min-idle: 1                                 # 最小维持连接数
+      max-idle: 1                                 # 最大维持连接数
+      max-total: 1                                # 最大的可用连接数
+      max-wait-millis: 200                        # 最大等待时间
+      initial-size: 1                             # 初始化连接数
+server: 
+  port: 8001                                      # 定义服务端口
+
+
+---
+
+#####################以下配置Eureka
+eureka:
+  client:
+    service-url:
+#      defaultZone: http://eureka-7001.com:7001/eureka                #*******************定义服务的注册路径：非常关键
+#      defaultZone: http://edmin:hello@eureka-7001.com:7001/eureka                #*******所有的注册服务都需要添加认证信息************定义服务的注册路径：非常关键：eureka设置安全认证之后的路径
+      defaultZone: http://edminbeta:hello@eureka-7002.com:7002/eureka
+  instance:
+     instance-id: dept-8001.com
+     prefer-ip-address: true     #***********底部显示IP地址：关键  **********鼠标指住注册信息，eureka页面左下角显示ip地址
+    
+info:
+    app.name: mldn-microcloud-dept
+    company.name: www.mldn.cn
+    build.aftifactId: $project.artifactId$
+    build.version: $project.version$
+
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml  # 定义mybatis核心配置文件的路径
+  type-aliases-package: cn.mldn.zwb.microcloud.vo       # 定义别名出现的开发包
+  mapper-locations:
+  - classpath:mybatis/mapping/**/*.xml            # 所有的映射文件路径
+
+spring: 
+  profiles: beta
+  application:
+    name: microcloud-config-dept-client
+   ########Application表格值回事大写MICROCLOUD-PROVIDER-DEPT#########*************关键：这里加入application.name，就可以在eureka注册中心注册的项目名改成合适的项目名（自定义的项目名）
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource  # 配置数据源类型
+    url: jdbc:mysql://localhost:3306/dept8001     # 数据库的连接地址
+    driver-class-name: org.gjt.mm.mysql.Driver    # 驱动程序
+    username: root                                # 用户名
+    password: 123456                          # 密码
+    dbcp2:                                        # 数据库连接池配置
+      min-idle: 1                                 # 最小维持连接数
+      max-idle: 1                                 # 最大维持连接数
+      max-total: 1                                # 最大的可用连接数
+      max-wait-millis: 200                        # 最大等待时间
+      initial-size: 1                             # 初始化连接数
+server: 
+  port: 8001                                   # 定义服务端口
+
